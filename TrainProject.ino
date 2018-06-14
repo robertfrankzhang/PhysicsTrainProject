@@ -5,15 +5,11 @@
 int frontHallSensorInputPin = 7;
 int backHallSensorInputPin = 9;
 int bottomDisconnectedRailPin = 8;
-
-
 int servoPin = 4;
 #else
 int frontHallSensorInputPin = 2;
 int backHallSensorInputPin = 3;
 int bottomDisconnectedRailPin = 6;
-
-
 int servoPin = 4;
 #endif
 
