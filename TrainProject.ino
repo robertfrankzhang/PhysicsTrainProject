@@ -1,18 +1,10 @@
 #include <Servo.h>
 
 //Define Inputs and Output Pins
-#ifdef IN_SCHOOL
 int frontHallSensorInputPin = 7;
 int backHallSensorInputPin = 9;
 int bottomDisconnectedRailPin = 8;
 int servoPin = 4;
-#else
-int frontHallSensorInputPin = 2;
-int backHallSensorInputPin = 3;
-int bottomDisconnectedRailPin = 6;
-int servoPin = 4;
-#endif
-
 
 //Define default status variables of pins
 int initialFrontHallSensorReading;
@@ -23,9 +15,9 @@ Servo bridge;
 //Abstraction Functions
 void setBottomRail(boolean isEnabled){
   if (isEnabled){
-    digitalWrite(bottomDisconnectedRailPin,HIGH);
-  }else{
     digitalWrite(bottomDisconnectedRailPin,LOW);
+  }else{
+    digitalWrite(bottomDisconnectedRailPin,HIGH);
   }
 }
 
@@ -37,7 +29,7 @@ boolean getBackHallSensorReading(){
 }
 
 boolean isTrainPassingFrontSensor(){
-  if (digitalRead(frontHallSensorInputPin) != initialFrontHallSensorReading){
+  if (getFrontHallSensorReading() != initialFrontHallSensorReading){
     return true;
   }else{
     return false;
@@ -45,7 +37,7 @@ boolean isTrainPassingFrontSensor(){
 }
 
 boolean isTrainPassingBackSensor(){
-  if (digitalRead(backHallSensorInputPin) != getBackHallSensorReading()){
+  if (getBackHallSensorReading() != initialBackHallSensorReading){
     return true;
   }else{
     return false;
@@ -65,8 +57,8 @@ void setup() {
   bridge.attach(servoPin);
 
   //Get initial readings
-  initialFrontHallSensorReading = getFrontHallSensorReading();
-  initialBackHallSensorReading = getBackHallSensorReading();
+  initialFrontHallSensorReading = 1;
+  initialBackHallSensorReading = 1;
   setBottomRail(false);
 }
 
